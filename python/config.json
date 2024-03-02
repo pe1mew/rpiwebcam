@@ -1,0 +1,12 @@
+{
+    "latitude": 52.21,
+    "longitude": 5.96,
+    "output_path": "captures",
+    "upload_url": "https://some.url/test/api.php",
+    "source_identifier": "secret",
+    "num_to_keep": 288,
+    "text_position": [10, 10],
+    "text_color": [128, 128, 128],
+    "font_size": 17,
+    "font_path": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+}
