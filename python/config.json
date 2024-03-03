@@ -1,9 +1,9 @@
 {
-    "latitude": 52.211,
-    "longitude": 5.983,
+    "latitude": 52.2,
+    "longitude": 5.9,
     "output_path": "captures",
-    "upload_url": "https://www.pe1mew.nl/test/api.php",
-    "source_identifier": "xXj4gkS6yB0LIwfifkAz",
+    "upload_url": "https://some.url/api.php",
+    "source_identifier": "secret",
     "num_to_keep": 288,
     "text_position": [10, 10],
     "text_color": [255, 128, 0],

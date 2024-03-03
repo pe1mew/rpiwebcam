@@ -1,6 +1,9 @@
 # Code for a simple webcam using a RaspberryPi and a camera.
 
 
+
+![componentDiagram](images/componentDiagram.png)
+
 ### Disclaimer
 This Python code is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
   

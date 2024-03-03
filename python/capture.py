@@ -5,31 +5,32 @@
 # @date see version table
 #
 # @section Versions
-# 
+#
 #  version|date      |Comment
 #  -------|----------|-------------------
 #   0.0.4 | 29-2-2024| Added limitation to upload only during daytime
 #   0.0.5 |  2-3-2024| Corrected working of daytime detection to one that uses sun elevation above horizon
 #   0.0.6 |  2-3-2024| Added Doxygen compatibel documentation.
-# 
+#   0.0.7 |  3-3-2024| Cleanup, remove deletion of files, .
+#
 # @section Execution
 #
 # Example: `python camera3_004.py --config_file config.json`
-# 
+#
 # @section Notes
 #
 # ### Disclaimer
-# This Python code is distributed in the hope that it will be useful, 
-# but WITHOUT ANY WARRANTY; without even the implied warranty of 
+# This Python code is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-#   
+#
 # ### License
-# This Python code is free software: 
-# you can redistribute it and/or modify it under the terms of a 
-# Creative Commons Attribution-NonCommercial 4.0 International License 
+# This Python code is free software:
+# you can redistribute it and/or modify it under the terms of a
+# Creative Commons Attribution-NonCommercial 4.0 International License
 # (http://creativecommons.org/licenses/by-nc/4.0/) by PE1MEW (http://pe1mew.nl)
 # E-mail: pe1mew@pe1mew.nl
-# 
+#
 # <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
 # 
 # 
@@ -86,7 +87,6 @@ def capture_and_save_image(config):
         longitude = config.get('longitude', 0.0)
 
         # Check if it is daytime before capturing an image
-#        if not sunup(str(latitude), str(longitude), datetime.now()):
         if not sunup(str(latitude), str(longitude), datetime.now(), '-3'):
             print("It is not daytime. Skipping image capture.")
             return
@@ -128,10 +128,6 @@ def capture_and_save_image(config):
                 # Print the response from the server
                 print("Upload response:", response.text)
 
-                # Remove old JPG images after uploading
-                num_to_keep = config.get('num_to_keep', 5)
-                remove_old_images(config['output_path'], num_to_keep)
-
     except Exception as e:
         print(f"Error: {e}")
 
@@ -165,28 +161,6 @@ def add_text_to_image(image_path, text, config):
 
     except Exception as e:
         print(f"Error adding text to image: {e}")
-
-def remove_old_images(output_path, num_to_keep):
-    """! Keep only latest number of images.
-    @param string   Path to images.
-    @param number   Number latest images to keep.
-    """
-    try:
-        # Get a list of all JPG files in the output path
-        jpg_files = [f for f in os.listdir(output_path) if f.lower().endswith('.jpg')]
-        jpg_files = sorted(jpg_files, key=lambda x: os.path.getmtime(os.path.join(output_path, x)))
-
-        # Calculate the number of files to remove
-        num_to_remove = max(0, len(jpg_files) - num_to_keep)
-
-        # Remove the oldest JPG files
-        for i in range(num_to_remove):
-            file_to_remove = os.path.join(output_path, jpg_files[i])
-            os.remove(file_to_remove)
-            print(f"Removed old image: {file_to_remove}")
-
-    except Exception as e:
-        print(f"Error removing old images: {e}")
 
 if __name__ == "__main__":
     # Set up command-line argument parser
