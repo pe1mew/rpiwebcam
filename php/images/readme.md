@@ -1,0 +1,1 @@
+This directory hold the uploaded images and videos and shall have permissions 777.
