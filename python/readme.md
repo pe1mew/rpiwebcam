@@ -55,7 +55,15 @@ The script `log_rotation.sh` is execute dayly at 12 PM and performs teh followin
 
 To configure crontab execute `crontab -e` and add the following line for a execution at 24 hour interval:
 ```bash
+# every 5 minutes take a picture and upload
+*/5 * * * * cd ~/python && python capture.py --config_file config.json >> capture.log 2>&1
+
+# every day at 12:00 pm log rotation
 0 12 * * *  cd ~/python && ./log_rotation.sh >> capture.log 2>&1
+
+# every day at 01:00 am generate video and clean up old images
+0 1 * * * cd ~/python && python generate.py --config_file config.json >> capture.log 2>&1
+
 ```
 
 

@@ -37,6 +37,15 @@
             border: none;
             cursor: pointer;
         }
+        
+        #videoButton {
+            padding: 10px;
+            background-color: #f44285;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -61,7 +70,10 @@
         echo '<img src="data:image/jpeg;base64,' . base64_encode(file_get_contents($latestFile)) . '" alt="Latest Image">';
         
         // Add the "Mosaic" button
-        echo '<div class="text-container">Click <a href="mosaic.php" id="mosaicButton">Mosaic</a> for 24 hour captures. </div>';
+        echo '<div class="text-container">Click <a href="mosaic.php" id="mosaicButton">Mosaic</a> for 24 hour captures.</div>';
+        
+        // Add the "Video" button
+        echo '<div class="text-container">Click <a href="video.php" id="videoButton">Video</a> of previous 24 hour captures.</div>';
     } else {
         echo 'No JPG images found in the directory.';
     }
