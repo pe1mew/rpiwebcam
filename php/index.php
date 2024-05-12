@@ -50,6 +50,10 @@
 </head>
 <body>
     <?php
+    
+    // Include the authentication file
+    require_once 'auth.php';
+
     $directory = 'images'; // Replace with the path to your image directory
 
     // Scan the directory for JPG files

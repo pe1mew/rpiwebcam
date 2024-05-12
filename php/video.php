@@ -53,6 +53,9 @@ $latestVideo = isset($files[0]) ? $files[0] : null;
 
 <div id="video-container">
     <?php
+    // Include the authentication file
+    require_once 'auth.php';
+
     // Display the latest video if available
     if ($latestVideo) {
         echo '<div class="text-container">Video of previous 24 hour captures.</div>';
