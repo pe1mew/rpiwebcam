@@ -4,6 +4,8 @@ This directory holds 3 files that are required for the Python "Image capture and
  - `api.php` presents a REST API for posting images.
  - `index.php` "home" page for watching the images. 
  - `mosaic.php` Shows a mosaic of the images of the last 24 hours. 
+ - `video.php` Presents a motion capture of last 24 hour images taken. 
+ - `auth.php` Deliverst password protection for the site. 
  
 ## Directory structure
 The PHP-files can be located enywehere on a webserver that supports php. 
