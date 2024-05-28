@@ -12,6 +12,8 @@
 #   0.0.5 |  2-3-2024| Corrected working of daytime detection to one that uses sun elevation above horizon
 #   0.0.6 |  2-3-2024| Added Doxygen compatibel documentation.
 #   0.0.7 |  3-3-2024| Cleanup, remove deletion of files, .
+#   0.1.0 |  4-3-2024| First version for release successfully executed 24 hours of testing. 
+#   0.0.1 | 28-5-2024| Added ability so set brightness of camera before capturing. 
 #
 # @section Execution
 #
@@ -102,6 +104,9 @@ def capture_and_save_image(config):
 
             # Combine the output path and filename
             output_path_with_filename = os.path.join(config.get('output_path', 'images'), filename)
+
+            # When required the brightness can be set manualy before capture is executed.
+            #camera.brightness = 55
 
             # Capture an image and save it to the specified output path
             camera.capture(output_path_with_filename)
