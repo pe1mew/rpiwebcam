@@ -1,8 +1,34 @@
 # Code for a simple webcam using a RaspberryPi and a camera.
 
-
+This howto is work in progress. 
 
 ![componentDiagram](images/componentDiagram.png)
+
+
+
+# Installation
+
+## Raspberry
+
+### Disable red led on camera.
+
+Edit config.txt and reboot the device. Camera LED is disabled for good but can be blinked though via GPIO. 
+More information see: https://raspberry-valley.azurewebsites.net/Disable-Camera-LED/
+
+Edit the configuration file
+```
+sudo nano /boot/config.txt
+```
+Add the following line to config.txt (it helps to add a comment section if you wish)
+```
+disable_camera_led=1
+```
+save changes and reboot
+```
+sudo reboot
+```
+
+## Webserver
 
 ### Disclaimer
 This Python code is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
