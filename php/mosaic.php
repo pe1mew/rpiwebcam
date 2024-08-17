@@ -102,6 +102,9 @@
                 }
             }
         }
+        
+        include 'footer.php';  // footer.
+
     ?>
 
     <div id="fullSize" onclick="closeFullSize()">
