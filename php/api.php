@@ -1,4 +1,38 @@
 <?php
+/**
+    @file upload.php
+    @brief Image Upload Handler for Webcam Project
+    
+    This script handles the image upload functionality of the webcam project.
+    It verifies a specific "sourceidentifier" header for authentication,
+    processes the uploaded image file, and removes images older than 24 hours.
+    
+    @details
+    - The script expects a POST request containing an image file.
+    - It authenticates the request using the "sourceidentifier" header.
+    - Upon successful upload, it saves the file in the "images/" directory.
+    - After saving, the script cleans up images in the directory that are older than 24 hours.
+    - The response is sent back in JSON format.
+    
+    @version 1.0
+    @date 18-8-2024
+    
+    @param string $expectedSourceIdentifier The expected source identifier used for authentication.
+    @param array $_FILES['image'] The uploaded image file sent in the POST request.
+    @param string $targetDirectory The directory where the uploaded image will be saved.
+    
+    @return JSON The response indicating the status of the upload operation.
+    
+    @function cleanupOldImages($directory) Removes image files older than 24 hours in the specified directory.
+    
+    @warning Ensure that the "sourceidentifier" header is properly set for authentication.
+    @note This script requires a POST request containing an image file.
+    
+    @author Remko Welling (PE1MEW) pe1mew@gmail.com
+ */
+?>
+
+<?php
 
 $expectedSourceIdentifier = 'xXj4gkS6yB0LIwfifkAz';
 

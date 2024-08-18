@@ -1,3 +1,25 @@
+<!--!
+
+    @file mosaic.php
+    @brief A dynamic image gallery with full-size image previews and tooltips.
+    
+    This HTML and PHP file dynamically generates a thumbnail gallery of images from a specified 
+    directory. Users can click on a thumbnail to view the full-size image in an overlay. Tooltips 
+    with file names appear when hovering over the thumbnails.
+    
+    @details
+    - The PHP script scans a specified directory for `.jpg` images and sorts them by file name in descending order.
+    - Thumbnails are displayed in a flexible grid layout, adjusting to the available screen space.
+    - When a user clicks on a thumbnail, a full-size preview of the image is shown in an overlay.
+    - CSS handles the styling of the gallery, and JavaScript manages the interaction for opening and closing the full-size image preview.
+    - The layout adapts to different screen sizes, making it responsive.
+
+    @version 0.24
+    @date 18-8-2024
+    @author Remko Welling (PE1MEW) pe1mew@gmail.com
+
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,6 +68,15 @@
             opacity: 1;
         }
 
+        .text-container {
+            text-align: center;
+            margin-top: 15px;
+            margin-bottom: 15px; /* Adjust as needed for space between text and image */
+            font-size: 20px; /* Adjust as needed */
+            font-family: 'Arial', sans-serif;
+            line-height: 2.5; /* Increase the line spacing (1.8 is an example value) */
+        }
+
         #fullSize {
             display: none;
             position: fixed;
@@ -62,6 +93,24 @@
             max-width: 90%;
             max-height: 90%;
             margin: auto;
+            cursor: pointer;
+        }
+        
+        #mainButton {
+            padding: 10px;
+            background-color: #f2b543;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+        
+        #videoButton {
+            padding: 10px;
+            background-color: #f44285;
+            color: #fff;
+            text-decoration: none;
+            border: none;
             cursor: pointer;
         }
     </style>
@@ -103,8 +152,10 @@
             }
         }
         
-        include 'footer.php';  // footer.
+        // Add instructions
+        echo '<div id="menu" class="text-container">Click <a href="index.php" id="mainButton">Home</a> for homepage or <a href="video.php" id="videoButton">Video</a> of last 24 hour captures.</div>';
 
+        
     ?>
 
     <div id="fullSize" onclick="closeFullSize()">
