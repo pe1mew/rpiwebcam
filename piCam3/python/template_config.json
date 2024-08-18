@@ -1,0 +1,21 @@
+{
+    "latitude": 46.585,
+    "longitude": 7.636,
+    "output_path": "captures",
+    "movie_path": ".",
+    "upload_url": "https://some.url/api.php",
+    "source_identifier": "secret",
+    "num_to_keep": 288,
+    "text_position": [10, 10],
+    "text_color": [255, 128, 0],
+    "font_size": 70,
+    "font_path": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+    "mqttServer": "some.mqtt.server",
+    "mqttPort": 1883,
+    "mqttUser": "username",
+    "mqttPass": "password",
+    "mqttTopic": "hartbeat/",
+    "resize_width": 1280,
+    "resize_height": 720,
+    "video_image_quality": 30
+}
