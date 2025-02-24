@@ -10,12 +10,13 @@
     @details
     - The script expects a POST request containing an image file.
     - It authenticates the request using the "sourceidentifier" header.
+    - test for the correct MIME type
     - Upon successful upload, it saves the file in the "images/" directory.
     - After saving, the script cleans up images in the directory that are older than 24 hours.
     - The response is sent back in JSON format.
     
-    @version 1.0
-    @date 18-8-2024
+    @version 1.1
+    @date 24-2-2024
     
     @param string $expectedSourceIdentifier The expected source identifier used for authentication.
     @param array $_FILES['image'] The uploaded image file sent in the POST request.
@@ -34,7 +35,7 @@
 
 <?php
 
-$expectedSourceIdentifier = 'xXj4gkS6yB0LIwfifkAz';
+$expectedSourceIdentifier = 'SomeScretTotestFor';
 
 // Step 1: Check if the "sourceidentifier" header is present and has the correct value
 if (isset($_SERVER['HTTP_SOURCEIDENTIFIER']) &&
@@ -45,31 +46,35 @@ if (isset($_SERVER['HTTP_SOURCEIDENTIFIER']) &&
 
         // Step 3: Check if the request contains a file
         if (isset($_FILES['image'])) {
+            
+            // Get the MIME type of the uploaded file
+            $fileMimeType = mime_content_type($_FILES['image']['tmp_name']);
 
-            // Set the target directory
-            $targetDirectory = 'images/';
+            // Define the allowed MIME types
+            $allowedMimeTypes = ['image/jpeg', 'video/mp4'];
 
-            // Get the file details
-            $fileName = $_FILES['image']['name'];
-            $fileTempName = $_FILES['image']['tmp_name'];
-            $fileSize = $_FILES['image']['size'];
-
-            // Set the destination path
-            $destinationPath = $targetDirectory . $fileName;
-
-            // Move the uploaded file to the destination path
-            if (move_uploaded_file($fileTempName, $destinationPath)) {
-                // File upload successful
+            // Step 4: Check if the MIME type is allowed
+            if (in_array($fileMimeType, $allowedMimeTypes)) {
                 
-                // Remove images older than 24 hours
-                cleanupOldImages($targetDirectory);
+                // Proceed with the file upload
+                $targetDirectory = 'images/';
+                $fileName = $_FILES['image']['name'];
+                $fileTempName = $_FILES['image']['tmp_name'];
+                $destinationPath = $targetDirectory . $fileName;
 
-                $response = array('status' => 'success', 'message' => 'Image uploaded successfully.');
+                if (move_uploaded_file($fileTempName, $destinationPath)) {
+                    // File upload successful
+                    cleanupOldImages($targetDirectory);
+                    $response = array('status' => 'success', 'message' => 'Image uploaded successfully.');
+                } else {
+                    // File upload failed
+                    $response = array('status' => 'error', 'message' => 'Failed to upload image.');
+                }
+
             } else {
-                // File upload failed
-                $response = array('status' => 'error', 'message' => 'Failed to upload image.');
+                // Invalid MIME type
+                $response = array('status' => 'error', 'message' => 'Invalid file type.');
             }
-
         } else {
             // No file in the request
             $response = array('status' => 'error', 'message' => 'No image file found in the request.');
@@ -84,6 +89,7 @@ if (isset($_SERVER['HTTP_SOURCEIDENTIFIER']) &&
     // Invalid or missing sourceidentifier header
     $response = array('status' => 'error', 'message' => 'Authentication failure.');
 }
+
 
 // Send JSON response
 header('Content-Type: application/json');
